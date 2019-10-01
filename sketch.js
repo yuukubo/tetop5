@@ -19,4 +19,9 @@ function draw() {
   stroke(100);
   rect((blockx) / 2, blocky, blockwh, blockwh);
   blocky += blockspd;
+
+  if (canvasx <= blockx + blockwh) { blockx = canvasx - blockwh }
+  if (blockx <= 0) { blockx = 0  }
+  if (canvasy <= blocky + blockwh) { blocky = canvasy - blockwh }
+  if (blocky < 0) { blocky = 0 }
 }

@@ -8,6 +8,7 @@ let blockspdy = 1;
 let blockspdx = blockwh;
 let blockx = 0;
 let blocky = 0;
+let blockcolor = 0;
 let keyInterval = 0;
 let linexfr = 0;
 let lineyfr = 0;
@@ -24,6 +25,7 @@ function setup() {
   linexnum = canvasx / linexinterval;
   lineynum = canvasy / lineyinterval;
   blockx = floor(linexnum / 2) * blockwh;
+  blockcolor = 255;
 }
 
 function draw() {
@@ -42,6 +44,10 @@ function draw() {
   push();
   strokeWeight(2);
   stroke(100);
+  fill(blockcolor);
+  rect(blockx, blocky - blockwh * 3, blockwh, blockwh);
+  rect(blockx, blocky - blockwh * 2, blockwh, blockwh);
+  rect(blockx, blocky - blockwh, blockwh, blockwh);
   rect(blockx, blocky, blockwh, blockwh);
   blocky += blockspdy;
   pop();
@@ -75,6 +81,9 @@ function draw() {
 
   if (canvasx <= blockx + blockwh) { blockx = canvasx - blockwh }
   if (blockx <= canvasFromx) { blockx = canvasFromx  }
-  if (canvasy <= blocky + blockwh) { blocky = canvasy - blockwh }
+  if (canvasy <= blocky + blockwh) { 
+    blocky = canvasy - blockwh;
+    blockcolor = 150;
+  }
   if (blocky < canvasFromy) { blocky = canvasFromy }
 }

@@ -18,6 +18,10 @@ let linexinterval = 20;
 let lineyinterval = 20;
 let linexnum = 0;
 let lineynum = 0;
+let button1x = 0;
+let button1y = 0;
+let buttonw = 30;
+let buttonh = 30;
 
 function setup() {
   createCanvas(canvasx, canvasy);
@@ -26,6 +30,8 @@ function setup() {
   lineynum = canvasy / lineyinterval;
   blockx = floor(linexnum / 2) * blockwh;
   blockcolor = 255;
+  button1x = canvasx * 9 / 10
+  button1y = canvasy * 9 / 10
 }
 
 function draw() {
@@ -39,6 +45,21 @@ function draw() {
   for (let i = 0; i < linexnum; i++) {
     line(linexfr + i * linexinterval, lineyfr, linexfr + i * linexinterval, lineyto);  
   }
+  pop();
+
+  push();
+  noStroke();
+  fill(150, 200, 250);
+  rect(button1x, button1y, buttonw, buttonh);
+  pop();
+
+  push();
+  textSize(24);
+  textFont("Comic Sans MS");
+  textAlign(CENTER, CENTER);
+  noStroke();
+  fill(10);
+  text(" ← ", button1x + buttonw / 2, button1y + buttonh / 2);
   pop();
 
   push();
@@ -86,4 +107,12 @@ function draw() {
     blockcolor = 150;
   }
   if (blocky < canvasFromy) { blocky = canvasFromy }
+}
+function mouseClicked() {
+  if ((button1x < mouseX && mouseX < button1x + buttonw) && (button1y < mouseY && mouseY < button1y + buttonh)) {
+    if ((canvasFromx < blockx) && (keyInterval === 0)) {
+      blockx -= blockspdx;
+      keyInterval = 10;
+    }
+  }
 }
